@@ -181,11 +181,21 @@ function displayTime(element){
         } else {
             time.innerText = `${hours}:${minutes}:${seconds} PM`;
         }
+        if (minutes < 10) {
+            time.innerText = `${hours}:0${minutes}:${seconds} PM`;
+        } else {
+            time.innerText = `${hours}:${minutes}:${seconds} PM`;
+        }
     } else {
         if (hours === 0)
             hours = 12;
         if (seconds < 10) {
             time.innerText = `${hours}:${minutes}:0${seconds} AM`;
+        } else {
+            time.innerText = `${hours}:${minutes}:${seconds} AM`;
+        }
+        if (minutes < 10) {
+            time.innerText = `${hours}:0${minutes}:${seconds} AM`;
         } else {
             time.innerText = `${hours}:${minutes}:${seconds} AM`;
         }
@@ -213,14 +223,19 @@ hello.addEventListener('click', () => {
 // This function should traverse every node in the DOM. Use recursion.
 // On each node, call func(node).
 
-function walkTheDOM(node, func){
-    if (node.firstElementChild === null){
-        return node.localName;
-    } else {
-        return walkTheDOM(node.firstElementChild, func(node.firstElementChild);
-    }
+function myFunc(node){
+    console.log(node.localName);
 }
 
-function func(node){
-    console.log(node.localName);
+function functionOne(x) { alert(x); }
+
+function functionTwo(var1 ,callback) {
+    callback(var1);
+}
+
+function walkTheDOM(node, func){
+    func(node);
+    for (let i = 0; i < node.childElementCount; i++) {
+        walkTheDOM(node.children[i], func);
+    }
 }
